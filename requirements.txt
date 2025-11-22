@@ -9,3 +9,4 @@ seaborn
 shap
 joblib
 mlxtend
+customtkinter
