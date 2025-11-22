@@ -2,7 +2,6 @@ venv/
 __pycache__/
 *.pkl
 *.csv
-!data/raw/*.csv
 .DS_Store
 .ipynb_checkpoints/
 Saved File/
