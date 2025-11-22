@@ -19,6 +19,29 @@ The dataset contains demographic information, habits, and medical history record
 - STDs history
 - Diagnosis results (Hinselmann, Schiller, Citology, Biopsy)
 
+## Project Structure
+
+```
+project/
+├── data/
+│   ├── raw/            # Original dataset
+│   ├── processed/      # Processed dataset
+│   └── models/         # Trained models
+├── gui/
+│   └── app.py          # GUI application (CustomTkinter)
+├── src/
+│   ├── config.py       # Configuration settings
+│   ├── data_processing.py # Data cleaning and preprocessing
+│   ├── evaluation.py   # Model evaluation metrics
+│   └── training.py     # Model training logic
+├── tests/
+│   └── verify_app.py   # Verification scripts
+├── main.py             # Entry point for the pipeline
+├── requirements.txt    # Python dependencies
+├── setup.sh            # Setup script
+└── README.md           # Project documentation
+```
+
 ## Project Overview
 
 The project involves the following steps:
