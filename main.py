@@ -30,7 +30,8 @@ def main():
 
     if args.mode == 'gui':
         print("Launching GUI...")
-        InputGUI()
+        app = InputGUI()
+        app.mainloop()
 
 if __name__ == "__main__":
     main()

@@ -30,6 +30,24 @@ class InputGUI(ctk.CTk):
         self.scrollable_frame = ctk.CTkScrollableFrame(self, label_text="Features")
         self.scrollable_frame.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         self.scrollable_frame.grid_columnconfigure(1, weight=1)
+        
+        # Bind mouse scroll events for Linux (Button-4 and Button-5)
+        # We need to bind to the canvas inside the scrollable frame
+        # CustomTkinter's ScrollableFrame structure is complex, but usually binding to the widget works if focused
+        # However, for global scrolling when hovering, we might need to bind to the frame itself
+        
+        def _on_mousewheel(event):
+            if event.num == 4:
+                self.scrollable_frame._parent_canvas.yview("scroll", -1, "units")
+            elif event.num == 5:
+                self.scrollable_frame._parent_canvas.yview("scroll", 1, "units")
+
+        self.scrollable_frame.bind("<Button-4>", _on_mousewheel)
+        self.scrollable_frame.bind("<Button-5>", _on_mousewheel)
+        
+        # Also bind to the inner frame so it works when hovering over widgets
+        self.scrollable_frame._parent_canvas.bind("<Button-4>", _on_mousewheel)
+        self.scrollable_frame._parent_canvas.bind("<Button-5>", _on_mousewheel)
 
         for i, feature in enumerate(self.feature_labels):
             # Create label for feature
@@ -113,6 +131,18 @@ class InputGUI(ctk.CTk):
         result_frame.grid(row=1, column=0, padx=20, pady=10, sticky="nsew")
         result_frame.grid_columnconfigure(0, weight=1)
         result_frame.grid_columnconfigure(1, weight=1)
+
+        # Bind mouse scroll events for Linux (Button-4 and Button-5)
+        def _on_mousewheel_result(event):
+            if event.num == 4:
+                result_frame._parent_canvas.yview("scroll", -1, "units")
+            elif event.num == 5:
+                result_frame._parent_canvas.yview("scroll", 1, "units")
+
+        result_frame.bind("<Button-4>", _on_mousewheel_result)
+        result_frame.bind("<Button-5>", _on_mousewheel_result)
+        result_frame._parent_canvas.bind("<Button-4>", _on_mousewheel_result)
+        result_frame._parent_canvas.bind("<Button-5>", _on_mousewheel_result)
 
         # Headers
         ctk.CTkLabel(result_frame, text="Model", font=ctk.CTkFont(weight="bold")).grid(row=0, column=0, pady=5, padx=10, sticky="w")
